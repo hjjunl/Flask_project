@@ -1,0 +1,201 @@
+
+{% extends "bootstrap/base.html" %}
+{% block title %} Employee Management {% endblock %}
+{% block navbar %}
+<div class = "navbar navbar-fixed-top">
+
+</div>
+{% endblock%}
+{% block content %}
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+
+	<html>
+<script src="/js/jquery-3.6.0.js"></script>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h2 class="page-header">
+			<i class="fa fa-table"></i>
+			직원 정보 관리
+			<a href ="dog" class="btn btn-success">직원 조회 및 분석</a>
+		</h2>
+
+	</div>
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>User_info</title>
+
+</head>
+<table class="table" width="100%">
+	<thead>
+		<tr>
+			<th>BADGE</th>
+			<th>이름</th>
+			<th>부서</th>
+			<th>성별</th>
+			<th>Position</th>
+
+		</tr>
+	</thead>
+		<td width="15%">
+			<input type="text" id="BADGE1" class="form-control" value='' style="width:100%;padding:2px;">
+		</td>
+		<td width="10%">
+			<input type="text" id="name1" class="form-control" value='' style="width:100%;padding:3px;">
+		</td>
+		<td width="5%">
+			<input type="text" id="department1" class="form-control" value='' style="width:100%;padding:3px;">
+		</td>
+		<td width="5%">
+			<input type="text" id="gender1" class="form-control" value='' style="width:100%;padding:3px;">
+		</td>
+		<td width="15%">
+			<input type="text"  id="position1" class="form-control" value='' style="width:100%;padding:3px;">
+		</td>
+	 	<td>
+			<input onclick="fun_add()" id="add" class="btn btn-success" value="추가"/>
+		</td>
+</table>
+<form class="" action="db_list" method="post">
+    <input type="file" name="upload_file" value="">
+    <input type="submit" value="{{check}}" />
+</form>
+<!--	 	<td>-->
+<!--			<input onclick="fun_add()" id="move" class="btn btn-success" value="조회 화면"/>-->
+<!--		</td>-->
+<table class="table table-hover table-striped text-center" style="border: 1px solid;" width="80%">
+	<thead>
+		<tr>
+			<th>BADGE</th>
+			<th>이름</th>
+			<th>부서</th>
+			<th>입사일</th>
+			<th>성별</th>
+			<th>Position</th>
+			<th>수정</th>
+			<th>삭제</th>
+		</tr>
+	</thead>
+
+<tbody>
+
+	{% for emp in empList %}
+	<tr bgcolor="#F7F7F7">
+		<td width="15%">
+			<input type="text" id="BADGE{{emp.BADGE}}" class="form-control" value={{emp.BADGE}} style="width:80%;padding:2px;">
+		</td>
+		<td width="10%">
+			<input type="text" id="name{{emp.BADGE}}" class="form-control" value={{emp.name}} style="width:100%;padding:3px;">
+		</td>
+		<td width="5%">
+			<input type="text" id="department{{emp.BADGE}}" class="form-control" value={{emp.department}} style="width:100%;padding:3px;">
+		</td>
+		<td id="join_date{{emp.BADGE}}">{{emp.join_date}}</td>
+		<td id="gender{{emp.BADGE}}"> {{emp.gender}}</td>
+		<td width="15%">
+			<input type="text"  id="position{{emp.BADGE}}" class="form-control" value={{ emp.position}} style="width:100%;padding:3px;">
+		</td>
+		<td>
+			<input name="{{ emp.BADGE }}" onclick="fun_mod(this)" id="mod" class="btn btn-success" value="수정"/>
+		</td>
+		<td>
+			<input name="{{ emp.BADGE }}" onclick="fun_del(this)" id="del" class="btn btn-success" value="삭제"/>
+		</td>
+	</tr>
+	{% endfor %}
+<script>
+	function fun_add(){
+		const BADGE = document.getElementById("BADGE1").value;
+		const name = document.getElementById("name1").value;
+		const department = document.getElementById("department1").value;
+		const gender = document.getElementById("gender1").value;
+		const position = document.getElementById("position1").value;
+
+		var param = {
+			'BADGE' : BADGE,
+			'name' : name,
+			'department' : department,
+			'gender' : gender,
+			'position' : position,
+		}
+
+		$.ajax({
+			type : 'POST',
+			url : '/ins1.ajax',
+			data : JSON.stringify(param),
+			dataType : 'JSON',
+			contentType : "application/json",
+			success : function(data){
+				location.reload()
+			},
+			error : function(request, status, error){
+
+			}
+		})
+
+	}
+	function fun_mod(elem){
+		var id = elem.getAttribute('name');
+		const BADGE = document.getElementById("BADGE"+ id).value;
+		const name = document.getElementById("name" + id).value;
+		const department = document.getElementById("department"+ id).value;
+		const position = document.getElementById("position"+ id).value;
+		var param = {
+			'BADGE' : BADGE,
+			'name' : name,
+			'department' : department,
+			'position' : position,
+		}
+
+		$.ajax({
+			type : 'POST',
+			url : '/mod1.ajax',
+			data : JSON.stringify(param),
+			dataType : 'JSON',
+			contentType : "application/json",
+			success : function(data){
+				location.reload()
+			},
+			error : function(request, status, error){
+
+			}
+		})
+	}
+	function fun_del(elem){
+		var id = elem.getAttribute('name');
+		const BADGE = document.getElementById("BADGE"+ id).value;
+		alert(BADGE)
+		var param = {
+			'BADGE' : BADGE,
+		}
+
+		$.ajax({
+			type : 'POST',
+			url : '/del.ajax',
+			data : JSON.stringify(param),
+			dataType : 'JSON',
+			contentType : "application/json",
+			success : function(data){
+				location.reload()
+			},
+			error : function(request, status, error){
+
+			}
+		})
+	}
+</script>
+</tbody>
+</table>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<link href="/static/css/starter-template.css" rel="stylesheet">
+
+</html>
+{% endblock %}
