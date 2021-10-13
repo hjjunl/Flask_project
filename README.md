@@ -1,6 +1,6 @@
 # Flask_project
 
-### 1. Simple Employee management and analysis web
+### 1. Simple Employee management and analysis web (emp_program)
 - CRUD function
 - Excel uploads to application database (test.xlsx)
 - Shows employees' payment chart using chart.js
