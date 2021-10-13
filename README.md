@@ -6,6 +6,7 @@
 - Shows employees' payment chart using chart.js
 - DB (mariadb)
 - DB schema: department, payment_info, user_info, user_score
+
 <index.html>
 ![image](https://user-images.githubusercontent.com/50603209/137065517-5f7cc880-cfc1-4e99-a7c5-5420346df329.png)
 <db_list.html>
