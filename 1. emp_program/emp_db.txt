@@ -1,0 +1,144 @@
+-- --------------------------------------------------------
+-- 호스트:                          127.0.0.1
+-- 서버 버전:                        10.6.4-MariaDB - mariadb.org binary distribution
+-- 서버 OS:                        Win64
+-- HeidiSQL 버전:                  11.3.0.6295
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- testdb 데이터베이스 구조 내보내기
+CREATE DATABASE IF NOT EXISTS `testdb` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `testdb`;
+
+-- 테이블 testdb.department 구조 내보내기
+CREATE TABLE IF NOT EXISTS `department` (
+  `department_key` int(11) NOT NULL AUTO_INCREMENT,
+  `department_name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`department_key`)
+) ENGINE=InnoDB AUTO_INCREMENT=435679 DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.department:~5 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT IGNORE INTO `department` (`department_key`, `department_name`) VALUES
+	(1, 'IT'),
+	(2, 'HR'),
+	(3, 'Manufacturing'),
+	(4, 'R&D'),
+	(5, 'Dataanalyist');
+/*!40000 ALTER TABLE `department` ENABLE KEYS */;
+
+-- 테이블 testdb.payment_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `payment_info` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `badge_id` int(11) NOT NULL,
+  `payment` int(11) DEFAULT NULL,
+  `payment_type` varchar(30) DEFAULT NULL,
+  `payment_date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`payment_id`),
+  KEY `FK_payment_info_user_info` (`badge_id`),
+  CONSTRAINT `FK_payment_info_user_info` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.payment_info:~15 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `payment_info` DISABLE KEYS */;
+INSERT IGNORE INTO `payment_info` (`payment_id`, `badge_id`, `payment`, `payment_type`, `payment_date`) VALUES
+	(1, 57, 1000, 'salary', '2021-10-01 15:06:13'),
+	(2, 37, 1500, 'salary', '2021-10-01 15:07:37'),
+	(3, 52, 2000, 'salary', '2021-10-01 15:07:54'),
+	(4, 52, 500, 'bonus', '2021-10-01 15:08:38'),
+	(5, 56, 2000, 'salary', '2021-10-01 15:08:56'),
+	(6, 41, 3000, 'salary', '2021-10-01 15:09:13'),
+	(7, 35, 4000, 'salary', '2021-10-01 15:09:46'),
+	(8, 48, 500, 'salary', '2021-10-01 15:10:03'),
+	(9, 50, 1500, 'salary', '2021-10-01 15:10:10'),
+	(10, 42, 2000, 'salary', '2021-10-01 15:07:07'),
+	(11, 37, 1000, 'salary', '2021-10-01 15:07:23'),
+	(12, 60, 3000, 'salary', '2021-10-01 15:13:32'),
+	(13, 47, 3000, 'salary', '2021-10-01 15:13:57'),
+	(14, 50, 5000, 'bonus', '2021-10-01 16:29:06'),
+	(15, 1, 6000, 'salary', '2021-10-07 14:40:01');
+/*!40000 ALTER TABLE `payment_info` ENABLE KEYS */;
+
+-- 테이블 testdb.user_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_info` (
+  `BADGE` int(11) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `department` int(11) DEFAULT NULL,
+  `join_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `gender` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '남',
+  `position` varchar(20) CHARACTER SET utf8mb4 DEFAULT '사원',
+  PRIMARY KEY (`BADGE`),
+  KEY `user_info_ibfk_1` (`department`),
+  CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`department`) REFERENCES `department` (`department_key`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.user_info:~30 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
+INSERT IGNORE INTO `user_info` (`BADGE`, `name`, `department`, `join_date`, `gender`, `position`) VALUES
+	(1, 'HyeSu', 5, '2021-10-07 14:39:26', '여', '사원'),
+	(31, 'Sam', 1, '2021-09-29 12:37:58', '남', '수석'),
+	(33, 'Ryo', 2, '2021-09-29 12:37:58', '여', '사원'),
+	(34, 'DaHe', 1, '2021-09-29 12:37:58', '여', '책임'),
+	(35, 'HJ', 1, '2021-09-29 12:37:58', '남', '사원'),
+	(36, 'JinNo', 3, '2021-09-29 12:37:58', '남', '사원'),
+	(37, 'ChangHo', 4, '2021-09-29 12:37:58', '남', '사원'),
+	(38, 'JunHu', 2, '2021-09-29 12:37:58', '남', '사원'),
+	(39, 'Walt', 1, '2021-09-29 12:37:58', '여', '책임'),
+	(40, 'Jennifer', 3, '2021-09-29 12:37:58', '여', '수석'),
+	(41, 'Fredy', 4, '2021-09-29 12:37:58', '남', '책임'),
+	(42, 'Alisias', 2, '2021-09-29 12:37:58', '여', '수석'),
+	(43, 'Kevic', 4, '2021-09-29 12:37:58', '남', '팀장'),
+	(44, 'Leon', 2, '2021-09-29 12:37:58', '여', '사원'),
+	(45, 'Marcel', 5, '2021-09-29 12:37:58', '남', '인턴'),
+	(46, 'JohnK', 1, '2021-09-29 12:37:58', '남', '수석'),
+	(47, 'SwinWin', 4, '2021-09-29 12:37:58', '여', '수석'),
+	(48, 'HyeSu', 2, '2021-09-29 12:37:58', '여', '사원'),
+	(49, 'DaHye', 1, '2021-09-29 12:37:58', '여', '책임'),
+	(50, 'HyunJun', 1, '2021-09-29 12:37:58', '남', '사원'),
+	(51, 'JinHo', 3, '2021-09-29 12:37:58', '남', '사원'),
+	(52, 'ChanHo', 4, '2021-09-29 12:37:58', '남', '사원'),
+	(53, 'JunHo', 2, '2021-09-29 12:37:58', '남', '사원'),
+	(54, 'Worney', 1, '2021-09-29 12:37:58', '여', '책임'),
+	(55, 'Jenny', 3, '2021-09-29 12:37:58', '여', '수석'),
+	(56, 'Fred', 4, '2021-09-29 12:37:58', '남', '책임'),
+	(57, 'Alis', 2, '2021-09-29 12:37:58', '여', '수석'),
+	(58, 'Kevin', 4, '2021-09-29 12:37:58', '남', '팀장'),
+	(59, 'Lion', 2, '2021-09-29 12:37:58', '여', '사원'),
+	(60, 'Jefferson', 3, '2021-09-29 12:37:58', '남', '인턴');
+/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+
+-- 테이블 testdb.user_score 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_score` (
+  `user_tb_id` int(11) NOT NULL AUTO_INCREMENT,
+  `badge_id` int(11) NOT NULL,
+  `score` int(11) DEFAULT NULL,
+  `test_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `test_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`user_tb_id`),
+  KEY `FK_user_score_user_info` (`badge_id`),
+  CONSTRAINT `FK_user_score_user_info` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.user_score:~7 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `user_score` DISABLE KEYS */;
+INSERT IGNORE INTO `user_score` (`user_tb_id`, `badge_id`, `score`, `test_date`, `test_type`) VALUES
+	(12, 57, 90, '2021-10-08 09:07:03', 'mid'),
+	(13, 42, 85, '2021-10-08 09:07:18', 'mid'),
+	(14, 50, 100, '2021-10-08 09:07:27', 'mid'),
+	(15, 48, 88, '2021-10-08 09:07:45', 'mid'),
+	(16, 37, 77, '2021-10-08 09:08:01', 'mid'),
+	(17, 52, 90, '2021-10-08 09:27:21', 'final'),
+	(18, 52, 80, '2021-10-08 09:29:50', 'mid');
+/*!40000 ALTER TABLE `user_score` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
