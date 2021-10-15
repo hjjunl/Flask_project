@@ -4,6 +4,8 @@
 - CRUD function
 - Excel uploads to application database (test.xlsx)
 - Shows employees' payment chart using chart.js
+- Predict new employees' salary (department, gender, position)
+- simple random forest regressor model
 - DB (mariadb)
 - DB schema: department, payment_info, user_info, user_score
 
