@@ -10,8 +10,7 @@
 - DB schema: department, payment_info, user_info, user_score
 
 <index.html>
-![image](https://user-images.githubusercontent.com/50603209/137065517-5f7cc880-cfc1-4e99-a7c5-5420346df329.png)
-<db_list.html>
-![image](https://user-images.githubusercontent.com/50603209/137065385-e65c428b-b621-4e43-9f70-5037c13d487b.png)
-<직원관리>
-![image](https://user-images.githubusercontent.com/50603209/137065794-d89e02ac-754f-42a3-9130-6ab28ed9357e.png)
+![image](https://user-images.githubusercontent.com/50603209/137441756-753b118c-d583-468b-88bd-a3d471802648.png)<db_list.html>
+![image](https://user-images.githubusercontent.com/50603209/137441788-0bdf1c1f-872c-4ebd-b435-8d7dd6076705.png)<직원관리>
+![image](https://user-images.githubusercontent.com/50603209/137441867-de9f75c4-d529-47fd-9386-5383b100e524.png)직원 예측
+![image](https://user-images.githubusercontent.com/50603209/137441825-b6ee45be-c097-4bfb-a5bc-fac7fdd615c2.png)
