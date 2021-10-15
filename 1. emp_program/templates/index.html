@@ -3,16 +3,18 @@
 {% block title %} Employee information analysis {% endblock %}
 {% block navbar %}
 <div class = "navbar navbar-fixed-top">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<div>
-    <canvas id="myChart" width="500" height="300">
-    </canvas>
-</div>
-<script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<div>
+		<h1 class="page-header"><i class="fa fa-table"></i>직원 정보 조회 및 분석
+		</h1>
+		<canvas id="myChart" width="500" height="300">
+		</canvas>
+	</div>
+	<script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var data = {
         // The type of chart we want to create
-        type: 'line',
+        type: 'bar',
         // The data for our dataset
         data: {
             labels:{{name|safe}},
@@ -39,64 +41,113 @@
     }
     var chart = new Chart(ctx, data);
 </script>
+
+	<div>
+		<canvas id="myChart1" width="500" height="300">
+		</canvas>
+	</div>
+	<script>
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var data = {
+        // The type of chart we want to create
+        type: 'bar',
+        // The data for our dataset
+        data: {
+            labels:{{emp_analysis[2]|safe}},
+            datasets: [{
+                label: "predicted",
+                backgroundColor: 'rgb(255, 99, 132)',
+                fill:false, // line의 아래쪽을 색칠할 것인가?
+                borderColor: 'rgb(255, 99, 132)',
+                lineTension:0.1, // 값을 높이면, line의 장력이 커짐.
+                data: {{emp_analysis[1]|safe}},
+
+        },{
+		   label: 'real',
+			type : 'bar',         // 'line' type
+			fill : false,         // 채우기 없음
+			lineTension : 0.2,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+			pointRadius : 0,    // 각 지점에 포인트 주지 않음
+			backgroundColor: 'rgb(255, 153, 0)',
+			borderColor: 'rgb(255, 153, 0)',
+			data:{{emp_analysis[0]|safe}}
+			}]
+        },
+        // Configuration options go here
+        options: {
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
+		}
+    }
+    var chart = new Chart(ctx, data);
+</script>
 </div>
+
 {% endblock%}
 {% block content %}
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 
-	<html>
+<html>
 <script src="/js/jquery-3.6.0.js"></script>
 
 <div class="row">
 	<div class="col-lg-12">
-		<h2 class="page-header"><i class="fa fa-table"></i>직원 정보 조회 및 분석<a href ="db_list"
-			   class="btn btn-success"  >직원관리</a></h2>
+		<a href ="db_list" class="btn btn-success"  >직원관리</a>
+		<a href ="prediction" class="btn btn-success"  >신입월급 예측</a>
 	</div>
+
 </div>
 
 <head>
-    <meta charset="UTF-8">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	<meta charset="UTF-8">
+	<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 		  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" rel="stylesheet">
-    <title>User_info</title>
+	<title>User_info</title>
 
 </head>
 
 <table  class="table table-hover table-striped text-center" style="border: 1px solid;" width="80%">
 	<thead>
-		<th>부서</th>
-			<td width="15%">
-				<input type="text" id="department_select" class="form-control" value='' style="width:100%;padding:2px;">
-			</td>
+	<th>부서</th>
+	<td width="15%">
+		<input type="text" id="department_select" class="form-control" value='' style="width:100%;padding:2px;">
+	</td>
 	<thead>
-		<th>사번</th>
-			<td width="15%">
-				<input type="text" id="BADGE_select" class="form-control" value='' style="width:100%;padding:2px;">
-			</td>
-		<th>직원명</th>
-			<td width="10%">
-				<input type="text" id="name_select" class="form-control" value='' style="width:100%;padding:2px;">
-			</td>
-		<td>
-			<input name="a" onclick="fuc_select()" id="select" class="btn btn-success" value="검색"/>
-		</td>
-		<form>
-			<input type="button" value="전체 데이터 보기" onClick="window.location.reload()">
-		</form>
-		<tr>
-			<th>BADGE</th>
-			<th>이름</th>
-			<th>부서</th>
-			<th>입사일</th>
-			<th>성별</th>
-			<th>Position</th>
-			<th>월급</th>
-		</tr>
+	<th>사번</th>
+	<td width="15%">
+		<input type="text" id="BADGE_select" class="form-control" value='' style="width:100%;padding:2px;">
+	</td>
+	<th>직원명</th>
+	<td width="10%">
+		<input type="text" id="name_select" class="form-control" value='' style="width:100%;padding:2px;">
+	</td>
+	<td>
+		<input name="a" onclick="fuc_select()" id="select" class="btn btn-success" value="검색"/>
+	</td>
+	<form>
+		<input type="button" value="전체 데이터 보기" onClick="window.location.reload()">
+	</form>
+	<tr>
+		<th>BADGE</th>
+		<th>이름</th>
+		<th>부서</th>
+		<th>입사일</th>
+		<th>성별</th>
+		<th>Position</th>
+		<th>월급</th>
+
+	</tr>
 	</thead>
 
-<tbody>
+	<tbody>
 
 	{% for emp in empList %}
 	<tr bgcolor="#F7F7F7">
@@ -111,8 +162,9 @@
 		<td id="position{{emp.BADGE}}">{{ emp.position}}</td>
 		<td id="payment{{emp.payment}}"> {{emp.payment}}</td>
 	</tr>
+
 	{% endfor %}
-<script>
+	<script>
 	function fuc_select(){
 		const BADGE = document.getElementById("BADGE_select").value;
 		const name = document.getElementById("name_select").value;
@@ -150,17 +202,11 @@ function BADGE_id(elem){
 			data : JSON.stringify(param),
 			dataType : 'JSON',
 			contentType : "application/json",
-<!--			success : function(data){-->
-<!--				location.reload()-->
-<!--			},-->
-<!--			error : function(request, status, error){-->
-<!--				location.reload()-->
-<!--			}-->
 		})
 
 	}
 </script>
-</tbody>
+	</tbody>
 </table>
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>

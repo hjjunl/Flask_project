@@ -3,13 +3,21 @@ from flask import Flask, render_template, request, jsonify
 import pymysql
 from flask.templating import render_template
 from flask_bootstrap import Bootstrap
-
+from flask_sqlalchemy import SQLAlchemy
 import func
 import requests, os, uuid, json
+from models import user_info
+
+app = Flask(__name__)
+
+# database 설정파일
 
 app = Flask(__name__, static_url_path="", static_folder='static',
             template_folder='templates')
 Bootstrap(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:2000@localhost:3306/testdb"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
 
 
 @app.route('/ins.ajax', methods=['POST'])
@@ -18,7 +26,6 @@ def ins_ajax():
     BADGE = data['BADGE']
     name = data['name']
     department = data['department']
-    join_date = data['join_date']
     gender = data['gender']
     position = data['position']
     cnt = func.MyEmpDao().insEmp(BADGE, name, department, gender, position)
@@ -112,6 +119,8 @@ k = 0
 cnt = 0
 arr = []
 send = []
+
+
 #############
 @app.route('/send_BADGE.ajax', methods=['POST', 'GET'])
 def send_BADGE():
@@ -121,6 +130,7 @@ def send_BADGE():
     send.append(cnt1)
     result = "success" if cnt1 == 1 else "fail"
     return jsonify(result=result)
+
 
 @app.route('/select.ajax', methods=['POST'])
 def select_ajax():
@@ -137,6 +147,10 @@ def select_ajax():
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    # user_info_ = user_info.query.filter_by(name=user_info.name).first()
+    user_info_ = user_info.query.all()
+    emp_analysis=[]
+    print(user_info_)
     if len(arr) != 0:
         empList = arr[0]
         arr.pop()
@@ -147,22 +161,45 @@ def index():
         empList = func.select_emp(BADGE='', name='', department='');
         name = list(empList[1]['name'])
         payment = list(empList[1]['payment'].astype(int))
-        print(payment)
-
-    return render_template('index.html', empList=empList[0], name=name, payment=payment)
-
+        df = empList[1]
+        emp_analysis = func.emp_pre_ex(df)
+        print(empList[0])
+    return render_template('index.html', empList=empList[0], name=name, payment=payment, user_info=user_info_,
+                           emp_analysis=emp_analysis)
 
 
 @app.route('/individual.html', methods=['Get', 'POST'])
 def individual():
-    if len(send) !=0:
+    if len(send) != 0:
         send_data = send[0]
         send.pop()
         print(send_data)
     else:
-        send_data=[]
+        send_data = []
     return render_template('individual.html', send_data1=send_data)
 
+
+@app.route('/prediction', methods=['Get', 'POST'])
+def prediction():
+    empList = func.select_emp(BADGE='', name='', department='');
+    value = list(empList[1]['payment'].astype(int))
+    name = list(empList[1]['name'])
+    data_list = empList[0]
+    if request.method == 'POST' and len(request.form['upload_file_prediction']) != 0:
+        print("why...")
+        if len(request.form['upload_file_prediction']) != 0:
+            file = request.form['upload_file_prediction']
+            data = pd.read_excel(file)
+            # if len(data)==0:
+            #     prediction = func.emp_prediction()
+            # else:
+            prediction = func.emp_prediction(data)
+            value = prediction[0]
+            name = prediction[1]
+            data_list=prediction[2]
+
+    return render_template('prediction.html', prediction_value=value
+                           , name=name, data_list=data_list)
 
 if __name__ == '__main__':
     app.run(debug=True)
