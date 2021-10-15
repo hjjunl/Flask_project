@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `payment_info` (
   PRIMARY KEY (`payment_id`),
   KEY `FK_payment_info_user_info` (`badge_id`),
   CONSTRAINT `FK_payment_info_user_info` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- 테이블 데이터 testdb.payment_info:~15 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `payment_info` DISABLE KEYS */;
@@ -63,7 +63,16 @@ INSERT IGNORE INTO `payment_info` (`payment_id`, `badge_id`, `payment`, `payment
 	(12, 60, 3000, 'salary', '2021-10-01 15:13:32'),
 	(13, 47, 3000, 'salary', '2021-10-01 15:13:57'),
 	(14, 50, 5000, 'bonus', '2021-10-01 16:29:06'),
-	(15, 1, 6000, 'salary', '2021-10-07 14:40:01');
+	(15, 1, 6000, 'salary', '2021-10-07 14:40:01'),
+	(16, 54, 1500, 'salary', '2021-10-14 16:04:27'),
+	(17, 39, 2000, 'salary', '2021-10-14 16:04:50'),
+	(18, 47, 5000, 'salary', '2021-10-14 16:04:57'),
+	(19, 31, 7000, 'salary', '2021-10-14 16:05:23'),
+	(20, 33, 2000, 'salary', '2021-10-14 16:05:37'),
+	(21, 45, 4000, 'salary', '2021-10-14 16:05:44'),
+	(22, 59, 5000, 'salary', '2021-10-14 16:06:40'),
+	(23, 44, 3500, 'salary', '2021-10-14 16:06:54'),
+	(24, 58, 3500, 'salary', '2021-10-14 16:07:14');
 /*!40000 ALTER TABLE `payment_info` ENABLE KEYS */;
 
 -- 테이블 testdb.user_info 구조 내보내기
@@ -94,9 +103,9 @@ INSERT IGNORE INTO `user_info` (`BADGE`, `name`, `department`, `join_date`, `gen
 	(40, 'Jennifer', 3, '2021-09-29 12:37:58', '여', '수석'),
 	(41, 'Fredy', 4, '2021-09-29 12:37:58', '남', '책임'),
 	(42, 'Alisias', 2, '2021-09-29 12:37:58', '여', '수석'),
-	(43, 'Kevic', 4, '2021-09-29 12:37:58', '남', '팀장'),
+	(43, 'Kevic', 4, '2021-09-29 12:37:58', '남', '수석'),
 	(44, 'Leon', 2, '2021-09-29 12:37:58', '여', '사원'),
-	(45, 'Marcel', 5, '2021-09-29 12:37:58', '남', '인턴'),
+	(45, 'Marcel', 5, '2021-09-29 12:37:58', '남', '사원'),
 	(46, 'JohnK', 1, '2021-09-29 12:37:58', '남', '수석'),
 	(47, 'SwinWin', 4, '2021-09-29 12:37:58', '여', '수석'),
 	(48, 'HyeSu', 2, '2021-09-29 12:37:58', '여', '사원'),
@@ -109,9 +118,9 @@ INSERT IGNORE INTO `user_info` (`BADGE`, `name`, `department`, `join_date`, `gen
 	(55, 'Jenny', 3, '2021-09-29 12:37:58', '여', '수석'),
 	(56, 'Fred', 4, '2021-09-29 12:37:58', '남', '책임'),
 	(57, 'Alis', 2, '2021-09-29 12:37:58', '여', '수석'),
-	(58, 'Kevin', 4, '2021-09-29 12:37:58', '남', '팀장'),
+	(58, 'Kevin', 4, '2021-09-29 12:37:58', '남', '수석'),
 	(59, 'Lion', 2, '2021-09-29 12:37:58', '여', '사원'),
-	(60, 'Jefferson', 3, '2021-09-29 12:37:58', '남', '인턴');
+	(60, 'Jefferson', 3, '2021-09-29 12:37:58', '남', '사원');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 
 -- 테이블 testdb.user_score 구조 내보내기
@@ -124,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `user_score` (
   PRIMARY KEY (`user_tb_id`),
   KEY `FK_user_score_user_info` (`badge_id`),
   CONSTRAINT `FK_user_score_user_info` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 -- 테이블 데이터 testdb.user_score:~7 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user_score` DISABLE KEYS */;
@@ -135,7 +144,14 @@ INSERT IGNORE INTO `user_score` (`user_tb_id`, `badge_id`, `score`, `test_date`,
 	(15, 48, 88, '2021-10-08 09:07:45', 'mid'),
 	(16, 37, 77, '2021-10-08 09:08:01', 'mid'),
 	(17, 52, 90, '2021-10-08 09:27:21', 'final'),
-	(18, 52, 80, '2021-10-08 09:29:50', 'mid');
+	(18, 52, 80, '2021-10-08 09:29:50', 'mid'),
+	(19, 54, 88, '2021-10-15 13:17:27', 'mid'),
+	(20, 34, 77, '2021-10-15 13:17:37', 'final'),
+	(21, 56, 60, '2021-10-15 13:17:43', 'final'),
+	(22, 44, 99, '2021-10-15 13:18:29', 'mid'),
+	(23, 39, 88, '2021-10-15 13:18:47', 'final'),
+	(24, 47, 100, '2021-10-15 13:19:21', 'final'),
+	(25, 50, 90, '2021-10-15 13:20:22', 'final');
 /*!40000 ALTER TABLE `user_score` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
