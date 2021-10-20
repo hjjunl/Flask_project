@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `payment_info` (
   CONSTRAINT `FK_payment_info_user_info` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
--- 테이블 데이터 testdb.payment_info:~15 rows (대략적) 내보내기
+-- 테이블 데이터 testdb.payment_info:~24 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `payment_info` DISABLE KEYS */;
 INSERT IGNORE INTO `payment_info` (`payment_id`, `badge_id`, `payment`, `payment_type`, `payment_date`) VALUES
 	(1, 57, 1000, 'salary', '2021-10-01 15:06:13'),
@@ -93,9 +93,9 @@ CREATE TABLE IF NOT EXISTS `user_info` (
 INSERT IGNORE INTO `user_info` (`BADGE`, `name`, `department`, `join_date`, `gender`, `position`) VALUES
 	(1, 'HyeSu', 5, '2021-10-07 14:39:26', '여', '사원'),
 	(31, 'Sam', 1, '2021-09-29 12:37:58', '남', '수석'),
-	(33, 'Ryo', 2, '2021-09-29 12:37:58', '여', '사원'),
+	(33, 'Ryo', 2, '2021-09-29 12:37:58', '여', '책임'),
 	(34, 'DaHe', 1, '2021-09-29 12:37:58', '여', '책임'),
-	(35, 'HJ', 1, '2021-09-29 12:37:58', '남', '사원'),
+	(35, 'HJ', 2, '2021-09-29 12:37:58', '남', '사원'),
 	(36, 'JinNo', 3, '2021-09-29 12:37:58', '남', '사원'),
 	(37, 'ChangHo', 4, '2021-09-29 12:37:58', '남', '사원'),
 	(38, 'JunHu', 2, '2021-09-29 12:37:58', '남', '사원'),
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `user_score` (
   CONSTRAINT `FK_user_score_user_info` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
--- 테이블 데이터 testdb.user_score:~7 rows (대략적) 내보내기
+-- 테이블 데이터 testdb.user_score:~14 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user_score` DISABLE KEYS */;
 INSERT IGNORE INTO `user_score` (`user_tb_id`, `badge_id`, `score`, `test_date`, `test_type`) VALUES
 	(12, 57, 90, '2021-10-08 09:07:03', 'mid'),
