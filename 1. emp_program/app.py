@@ -1,26 +1,23 @@
 import pandas as pd
 from flask import Flask, render_template, request, jsonify
-import pymysql
 from flask.templating import render_template
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 import func
-import requests, os, uuid, json
 from models import user_info
 
 app = Flask(__name__)
 
 # database 설정파일
-
-app = Flask(__name__, static_url_path="", static_folder='static',
-            template_folder='templates')
+app = Flask(__name__, static_url_path = "", static_folder = 'static',
+            template_folder = 'templates')
 Bootstrap(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:2000@localhost:3306/testdb"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
-@app.route('/ins.ajax', methods=['POST'])
+@app.route('/ins.ajax', methods = ['POST'])
 def ins_ajax():
     data = request.get_json()
     BADGE = data['BADGE']
@@ -30,10 +27,10 @@ def ins_ajax():
     position = data['position']
     cnt = func.MyEmpDao().insEmp(BADGE, name, department, gender, position)
     result = "success" if cnt == 1 else "fail"
-    return jsonify(result=result)
+    return jsonify(result = result)
 
 
-@app.route('/mod.ajax', methods=['POST'])
+@app.route('/mod.ajax', methods = ['POST'])
 def mod_ajax():
     data = request.get_json()
     BADGE = data['BADGE']
@@ -44,21 +41,21 @@ def mod_ajax():
     position = data['position']
     cnt = func.MyEmpDao().updEmp(name, department, join_date, gender, position, BADGE)
     result = "success" if cnt == 1 else "fail"
-    return jsonify(result=result)
+    return jsonify(result = result)
 
 
-@app.route('/del.ajax', methods=['POST'])
+@app.route('/del.ajax', methods = ['POST'])
 def del_ajax():
     data = request.get_json()
     BADGE = data['BADGE']
     print(BADGE)
     cnt = func.MyEmpDao().delEmp(BADGE)
     result = "success" if cnt == 1 else "fail"
-    return jsonify(result=result)
+    return jsonify(result = result)
 
 
 ##################
-@app.route('/mod1.ajax', methods=['POST'])
+@app.route('/mod1.ajax', methods = ['POST'])
 def mod1_ajax():
     data = request.get_json()
     BADGE = data['BADGE']
@@ -67,10 +64,10 @@ def mod1_ajax():
     position = data['position']
     cnt = func.MyEmpDao().updEmp1(name, department, position, BADGE)
     result = "success" if cnt == 1 else "fail"
-    return jsonify(result=result)
+    return jsonify(result = result)
 
 
-@app.route('/ins1.ajax', methods=['POST'])
+@app.route('/ins1.ajax', methods = ['POST'])
 def ins1_ajax():
     data = request.get_json()
     BADGE = data['BADGE']
@@ -80,10 +77,10 @@ def ins1_ajax():
     position = data['position']
     cnt = func.MyEmpDao().insEmp(BADGE, name, department, gender, position)
     result = "success" if cnt == 1 else "fail"
-    return jsonify(result=result)
+    return jsonify(result = result)
 
 
-@app.route("/db_list", methods=['POST', 'GET'])
+@app.route("/db_list", methods = ['POST', 'GET'])
 def db_list():
     check = '파일 확인'
     if request.method == 'POST':
@@ -109,11 +106,10 @@ def db_list():
 
     empList = func.MyEmpDao().getEmps();
 
-    return render_template('db_list.html', empList=empList, check=check)
+    return render_template('db_list.html', empList = empList, check = check)
 
 
 empList = []
-
 #################
 k = 0
 cnt = 0
@@ -122,17 +118,17 @@ send = []
 
 
 #############
-@app.route('/send_BADGE.ajax', methods=['POST', 'GET'])
+@app.route('/send_BADGE.ajax', methods = ['POST', 'GET'])
 def send_BADGE():
     data = request.get_json()
     BADGE = data['BADGE']
     cnt1 = func.personal_data(BADGE)
     send.append(cnt1)
     result = "success" if cnt1 == 1 else "fail"
-    return jsonify(result=result)
+    return jsonify(result = result)
 
 
-@app.route('/select.ajax', methods=['POST'])
+@app.route('/select.ajax', methods = ['POST'])
 def select_ajax():
     data = request.get_json()
     if data != None:
@@ -142,33 +138,11 @@ def select_ajax():
         cnt = func.select_emp(BADGE, name, department)
         arr.append(cnt)
     result = "success" if cnt == 1 else "fail"
-    return jsonify(result=result), cnt
+    return jsonify(result = result), cnt
 
 
-@app.route("/", methods=['GET', 'POST'])
-def index():
-    # user_info_ = user_info.query.filter_by(name=user_info.name).first()
-    user_info_ = user_info.query.all()
-    emp_analysis=[]
-    print(user_info_)
-    if len(arr) != 0:
-        empList = arr[0]
-        arr.pop()
-        print(empList)
-        name = list(empList[1]['name'])
-        payment = list(empList[1]['payment'].astype(int))
-    else:
-        empList = func.select_emp(BADGE='', name='', department='');
-        name = list(empList[1]['name'])
-        payment = list(empList[1]['payment'].astype(int))
-        df = empList[1]
-        emp_analysis = func.emp_pre_ex(df)
-        print(empList[0])
-    return render_template('index.html', empList=empList[0], name=name, payment=payment, user_info=user_info_,
-                           emp_analysis=emp_analysis)
-
-
-@app.route('/individual.html', methods=['Get', 'POST'])
+# 상세 화면
+@app.route('/individual.html', methods = ['Get', 'POST'])
 def individual():
     if len(send) != 0:
         send_data = send[0]
@@ -176,31 +150,49 @@ def individual():
         print(send_data)
     else:
         send_data = []
-    return render_template('individual.html', send_data1=send_data)
+    return render_template('individual.html', send_data1 = send_data)
 
 
-@app.route('/prediction', methods=['Get', 'POST'])
+# 메인 화면
+@app.route("/", methods = ['GET', 'POST'])
+def index():
+    user_info_ = user_info.query.all()
+    emp_analysis = []
+    if len(arr) != 0:
+        empList = arr[0]
+        arr.pop()
+        print(empList)
+        name = list(empList[1]['name'])
+        payment = list(empList[1]['payment'].astype(int))
+    else:
+        empList = func.select_emp(BADGE = '', name = '', department = '');
+        name = list(empList[1]['name'])
+        payment = list(empList[1]['payment'].astype(int))
+        df = empList[1]
+        emp_analysis = func.emp_pre_ex(df)
+        print(empList[0])
+    return render_template('index.html', empList = empList[0], name = name, payment = payment, user_info = user_info_,
+                           emp_analysis = emp_analysis)
+
+
+# 예측 화면
+@app.route('/prediction', methods = ['Get', 'POST'])
 def prediction():
-    empList = func.select_emp(BADGE='', name='', department='');
+    empList = func.select_emp(BADGE = '', name = '', department = '')
     value = list(empList[1]['payment'].astype(int))
     name = list(empList[1]['name'])
     data_list = empList[0]
     if request.method == 'POST' and len(request.form['upload_file_prediction']) != 0:
-        print("why...")
         if len(request.form['upload_file_prediction']) != 0:
             file = request.form['upload_file_prediction']
             data = pd.read_excel(file)
-            # if len(data)==0:
-            #     prediction = func.emp_prediction()
-            # else:
             prediction = func.emp_prediction(data)
             value = prediction[0]
             name = prediction[1]
-            data_list=prediction[2]
+            data_list = prediction[2]
 
-    return render_template('prediction.html', prediction_value=value
-                           , name=name, data_list=data_list)
+    return render_template('prediction.html', prediction_value = value, name = name, data_list = data_list)
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    # app.run(host="localhost", port=8000, debug=True)
+    app.run(debug = True)
