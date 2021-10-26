@@ -14,7 +14,7 @@
 <직원 예측>
 ![image](https://user-images.githubusercontent.com/50603209/137441825-b6ee45be-c097-4bfb-a5bc-fac7fdd615c2.png)
 
-### 2. Job recommendation program 
+### 2. Job recommendation program (User based collaborative filtering)
 (check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/recommendation.py)
 - Used cosine similarity and recommend the closest top 10 company
 - Data is collected by crawling jobplanet.co.kr 2110 data
