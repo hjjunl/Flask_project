@@ -63,9 +63,6 @@ def recommendation():
                 job_planet_data.append(row)
             rs = curs.fetchall()
         for e in rs:
-            e[11] = e[11] + '%'
-            e[12] = e[12] + '%'
-            e[13] = e[13] + '%'
 
             temp = {'id': e[0], 'com_name': e[1], 'com_relation': e[2], 'mean_star': e[3], 'com_review': e[4],
                     'mean_sal': e[5],
