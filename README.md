@@ -16,11 +16,10 @@
 
 ### 2. Job recommendation program (User based collaborative filtering)
 (check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/recommendation.py)
-
 (How did I get the data? check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/job_planet_info.py)
 - Used cosine similarity and recommend the closest top 10 company
 - Data is collected by crawling jobplanet.co.kr 2110 data
-- data set: 연봉 범위 선택 2800 5600, 평균 별점 선택, 복지 및 급여, 업무와 삶의 균형, 사내문화, 승진 기회 및 가능성, 경영진, 기업 조회: 기업 인지도, 성장 가능성, 기업 추천율, CEO 지지율
+- data set: 평균 연봉, 평균 별점 선택, 복지 및 급여, 업무와 삶의 균형, 사내문화, 승진 기회 및 가능성, 경영진, 기업 조회: 기업 인지도, 성장 가능성, 기업 추천율, CEO 지지율
 - mean salary, mean_star, com_review_seg, welfare_sal, work_life_balance, company_culture, promotion opportunity, company head, company growth posibility_seg, company_recommendation_seg, CEO_support_seg
 ![image](https://user-images.githubusercontent.com/50603209/138800184-1635eb66-07af-4999-b6dd-827db6762e97.png)
 
