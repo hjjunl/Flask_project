@@ -16,6 +16,7 @@
 
 ### 2. Job recommendation program (User based collaborative filtering)
 (check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/recommendation.py)
+
 (How did I get the data? check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/job_planet_info.py)
 - Used cosine similarity and recommend the closest top 10 company
 - Data is collected by crawling jobplanet.co.kr 2110 data
