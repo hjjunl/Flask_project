@@ -25,7 +25,7 @@
 - When you click the company name it shows you the company information like CEO, total revenue, home-page, company address, capital...etc from database.
 - However if there is no company data you clicked it will crawl data from jobkorea.co.kr and save company data in the database and show it in website.
 
-![image](https://user-images.githubusercontent.com/50603209/138800184-1635eb66-07af-4999-b6dd-827db6762e97.png)
+![image](https://user-images.githubusercontent.com/50603209/139201076-17658e3f-6375-4b5d-9d9c-6986229edc2b.png)
+![image](https://user-images.githubusercontent.com/50603209/139201195-cbc7895f-063a-436f-9eee-b7cc172e30e1.png)
+![image](https://user-images.githubusercontent.com/50603209/139201275-405787b1-baba-432f-bb1f-71b3fa2345ea.png)
 
-![image](https://user-images.githubusercontent.com/50603209/138800242-acce6554-4aad-4f06-8e05-98c5ee57a332.png)
-![image](https://user-images.githubusercontent.com/50603209/138800273-0d47acdf-b09c-46dc-a3a3-2739b6270d41.png)
