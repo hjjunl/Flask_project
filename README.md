@@ -22,6 +22,9 @@
 - Data is collected by crawling jobplanet.co.kr 2110 data
 - data set: 평균 연봉, 평균 별점 선택, 복지 및 급여, 업무와 삶의 균형, 사내문화, 승진 기회 및 가능성, 경영진, 기업 조회: 기업 인지도, 성장 가능성, 기업 추천율, CEO 지지율
 - mean salary, mean_star, com_review_seg, welfare_sal, work_life_balance, company_culture, promotion opportunity, company head, company growth posibility_seg, company_recommendation_seg, CEO_support_seg
+- When you click the company name it shows you the company information like CEO, total revenue, home-page, company address, capital...etc from database.
+- However if there is no company data you clicked it will crawl data from jobkorea.co.kr and save company data in the database and show it in website.
+
 ![image](https://user-images.githubusercontent.com/50603209/138800184-1635eb66-07af-4999-b6dd-827db6762e97.png)
 
 ![image](https://user-images.githubusercontent.com/50603209/138800242-acce6554-4aad-4f06-8e05-98c5ee57a332.png)
