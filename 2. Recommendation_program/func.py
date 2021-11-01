@@ -29,7 +29,6 @@ def wait_elements_ready(_driver: webdriver, xpath: str, wait: int = WAIT_TIME) -
             (By.XPATH, xpath)))
     web_elements = _driver.find_elements_by_xpath(xpath)
     return web_elements
-########################################################################################
 
 # IT 기업 추천 (Item based collaborative filtering)
 def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, opportunity, com_head,
