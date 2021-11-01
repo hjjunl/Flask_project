@@ -54,8 +54,8 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
         df = pd.DataFrame(
             columns=['id', 'com_name', 'com_relation', 'mean_star', 'com_review', 'mean_sal', 'welfare_sal', \
                      'wo_la_bal', 'com_cul', 'opportunity', 'com_head', 'com_rec', 'CEO_sup', \
-                     'growth_pos'],
-            data=arr)
+                     'growth_pos'], data=arr
+         )
         labels = np.arange(1, 6, 1)
 
         # 평균 연복은 크게 5개로 나눔 cut
@@ -125,11 +125,13 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
         com_name = ','.join(com_result)
         user_choice = [int(user), mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, opportunity,
                        com_head,
-                       growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name]
+                       growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name
+                      ]
 
         sql_col = ['user_id', 'mean_sal', 'mean_star', 'com_review_seg', 'welfare_sal', 'wo_la_bal', \
                    'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg',
-                   'CEO_sup_seg', 'com_result']
+                   'CEO_sup_seg', 'com_result'
+                  ]
         user_choice = tuple(user_choice)
 
         df = pd.DataFrame([user_choice], columns=sql_col)
@@ -207,13 +209,16 @@ def check_com_info(com_name, com_id):
                     temp = {'com_name': e[0], 'com_bis': e[3], 'com_emp': e[4], 'com_div': e[5],
                             'com_est': e[6], 'com_capital': e[7], 'com_rev': e[8], 'com_sal': e[9], 'com_ceo': e[10],
                             'com_main_bis': e[11], 'com_en': e[12], 'com_page': e[13], 'com_address': e[14],
-                            'com_rel_com': e[15]}
+                            'com_rel_com': e[15]
+                           }
                     arr1.append(temp)
                 print(arr1)
-                column_kor = ['기업명', '산업', '사원수', '기업구분', '설립일', '자본금', '매출액', '대졸초임', '대표자', '주요사업', '4대보험', '홈페이지',
-                              '주소', '계열사']
+                column_kor = ['기업명', '산업', '사원수', '기업구분', '설립일', '자본금', '매출액', '대졸초임', 
+                              '대표자', '주요사업', '4대보험', '홈페이지', '주소', '계열사'
+                             ]
                 column_en = ['com_name', 'com_bis', 'com_emp', 'com_div', 'com_est', 'com_capital', 'com_rev', \
-                             'com_sal', 'com_ceo', 'com_main_bis', 'com_en', 'com_page', 'com_address', 'com_rel_com']
+                             'com_sal', 'com_ceo', 'com_main_bis', 'com_en', 'com_page', 'com_address', 'com_rel_com'
+                            ]
                 df = pd.DataFrame(columns=column_en, data=arr1)
                 df.columns = column_kor
                 df.reset_index(drop=True, inplace=True)
@@ -237,8 +242,10 @@ def check_com_info(com_name, com_id):
                                        '//*[@id="content"]/div/div/div[1]/div/div[3]/div[2]/div/div[1]/ul/li[1]/div/div[1]/div/a').click()
                 except Exception:
                     print('No company')
-                    column = ['com_id', 'com_bis', 'com_emp', 'com_div', 'com_est', 'com_capital', 'com_rev', \
-                              'com_sal', 'com_ceo', 'com_main_bis', 'com_en', 'com_page', 'com_address', 'com_rel_com']
+                    column = [
+                             'com_id', 'com_bis', 'com_emp', 'com_div', 'com_est', 'com_capital', 'com_rev', \
+                             'com_sal', 'com_ceo', 'com_main_bis', 'com_en', 'com_page', 'com_address', 'com_rel_com'
+                             ]
                     com_info_list = tuple([com_id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
                     df = pd.DataFrame([com_info_list], columns=column)
                     print(df)
@@ -260,7 +267,7 @@ def check_com_info(com_name, com_id):
                     print("기업 정보 클릭")
                     try:
                         wait_element_ready(driver, '/html/body/div[2]/div[4]/div[2]/div[2]/div/a[2]/div[1]').click()
-                        com_data = wait_element_ready(driver,
+                        com_data = wait_element_ready(driver, 
                                                       '//*[@id="company-body"]/div[1]/div[2]/div/table/tbody').text
                     except Exception:
                         print('예외처리무슨...')
