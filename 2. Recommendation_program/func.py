@@ -16,17 +16,14 @@ WAIT_TIME = 4
 
 
 def wait_element_ready(_driver: webdriver, xpath: str, wait: int = WAIT_TIME) -> WebElement:
-    WebDriverWait(_driver, wait).until(
-        expected_conditions.presence_of_all_elements_located(
-            (By.XPATH, xpath)))
+    WebDriverWait(_driver, wait).until(expected_conditions.presence_of_all_elements_located((By.XPATH, xpath)))
     web_element = _driver.find_element_by_xpath(xpath)
     return web_element
 
 
 def wait_elements_ready(_driver: webdriver, xpath: str, wait: int = WAIT_TIME) -> List:
     WebDriverWait(_driver, wait).until(
-        expected_conditions.presence_of_all_elements_located(
-            (By.XPATH, xpath)))
+        expected_conditions.presence_of_all_elements_located((By.XPATH, xpath)))
     web_elements = _driver.find_elements_by_xpath(xpath)
     return web_elements
 
@@ -51,10 +48,10 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
                 arr.append(row)
 
         df = pd.DataFrame(
-            columns=['id', 'com_name', 'com_relation', 'mean_star', 'com_review', 'mean_sal', 'welfare_sal', \
-                     'wo_la_bal', 'com_cul', 'opportunity', 'com_head', 'com_rec', 'CEO_sup', \
-                     'growth_pos'], data=arr
-         )
+                        columns=['id', 'com_name', 'com_relation', 'mean_star', 'com_review', 'mean_sal', 'welfare_sal', \
+                                 'wo_la_bal', 'com_cul', 'opportunity', 'com_head', 'com_rec', 'CEO_sup', \
+                                 'growth_pos'], data=arr
+                          )
         labels = np.arange(1, 6, 1)
 
         # 평균 연복은 크게 5개로 나눔 cut
@@ -98,14 +95,17 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
         if mean_star > 4.5:
             df = df[(df['mean_star'] >= 4)]
         # user가 선택한 값들
-        user_1 = [int(com_review_seg), int(welfare_sal), int(wo_la_bal), int(com_cul), int(opportunity), int(com_head),
-                  int(growth_pos_seg), int(com_rec_seg), int(CEO_sup_seg)]
+        user_1 = [
+                  float(com_review_seg), float(welfare_sal), float(wo_la_bal), float(com_cul), float(opportunity), float(com_head),
+                  float(growth_pos_seg), float(com_rec_seg), float(CEO_sup_seg)
+                 ]
 
         com_df = df.drop(['CEO_sup', 'com_rec', 'growth_pos', 'com_review', 'mean_sal_seg', 'com_relation'], axis=1)
         com_df.reset_index(drop=True, inplace=True)
-        com_df = com_df[['id', 'com_name', 'mean_star', 'com_review_seg', 'mean_sal', 'welfare_sal', 'wo_la_bal', \
-                         'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg',
-                         'CEO_sup_seg']]
+        com_df = com_df[[
+                         'id', 'com_name', 'mean_star', 'com_review_seg', 'mean_sal', 'welfare_sal', 'wo_la_bal', \
+                         'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg', 'CEO_sup_seg'
+                        ]]
         # 행을 잘라 list로 붙임
         com_list = []
         for i in range(len(com_df)):
@@ -122,9 +122,9 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
         for i in rec_com_list:
             com_result.append(i[1])
         com_name = ','.join(com_result)
-        user_choice = [int(user), mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, opportunity,
-                       com_head,
-                       growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name
+        user_choice = [
+                       int(user), mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, opportunity,
+                       com_head, growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name
                       ]
 
         sql_col = ['user_id', 'mean_sal', 'mean_star', 'com_review_seg', 'welfare_sal', 'wo_la_bal', \
@@ -205,17 +205,20 @@ def check_com_info(com_name, com_id):
                 curs.execute(sql)
                 rs = curs.fetchall()
                 for e in rs:
-                    temp = {'com_name': e[0], 'com_bis': e[3], 'com_emp': e[4], 'com_div': e[5],
+                    temp = {
+                            'com_name': e[0], 'com_bis': e[3], 'com_emp': e[4], 'com_div': e[5],
                             'com_est': e[6], 'com_capital': e[7], 'com_rev': e[8], 'com_sal': e[9], 'com_ceo': e[10],
                             'com_main_bis': e[11], 'com_en': e[12], 'com_page': e[13], 'com_address': e[14],
                             'com_rel_com': e[15]
                            }
                     arr1.append(temp)
                 print(arr1)
-                column_kor = ['기업명', '산업', '사원수', '기업구분', '설립일', '자본금', '매출액', '대졸초임', 
+                column_kor = [
+                              '기업명', '산업', '사원수', '기업구분', '설립일', '자본금', '매출액', '대졸초임', 
                               '대표자', '주요사업', '4대보험', '홈페이지', '주소', '계열사'
                              ]
-                column_en = ['com_name', 'com_bis', 'com_emp', 'com_div', 'com_est', 'com_capital', 'com_rev', \
+                column_en = [
+                             'com_name', 'com_bis', 'com_emp', 'com_div', 'com_est', 'com_capital', 'com_rev', \
                              'com_sal', 'com_ceo', 'com_main_bis', 'com_en', 'com_page', 'com_address', 'com_rel_com'
                             ]
                 df = pd.DataFrame(columns=column_en, data=arr1)
@@ -370,7 +373,6 @@ def check_com_info(com_name, com_id):
                 df = pd.DataFrame([com_info_list], columns=com_current_col)
                 df.reset_index(drop=True, inplace=True)
                 print(df)
-                # html = df.to_html(index=False, justify='center')
                 conn = engine.connect()
                 df.to_sql(name='com_info', con=engine, if_exists='append', index=False)
 
