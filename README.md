@@ -12,8 +12,7 @@
 <index.html>
 ![image](https://user-images.githubusercontent.com/50603209/137441756-753b118c-d583-468b-88bd-a3d471802648.png)
 <직원 예측>
-![image](https://user-images.githubusercontent.com/50603209/137441825-b6ee45be-c097-4bfb-a5bc-fac7fdd615c2.png)
-
+![image](https://user-images.githubusercontent.com/50603209/141024092-8855110a-9be5-422b-829d-b4146e1073ac.png)
 ### 2. Job recommendation program (User based collaborative filtering)
 (check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/recommendation.py)
 
@@ -25,7 +24,6 @@
 - When you click the company name it shows you the company information like CEO, total revenue, home-page, company address, capital...etc from database.
 - However if there is no company data you clicked it will crawl data from jobkorea.co.kr and save company data in the database and show it in website.
 
-![image](https://user-images.githubusercontent.com/50603209/139201076-17658e3f-6375-4b5d-9d9c-6986229edc2b.png)
 ![image](https://user-images.githubusercontent.com/50603209/139201195-cbc7895f-063a-436f-9eee-b7cc172e30e1.png)
 ![image](https://user-images.githubusercontent.com/50603209/139201275-405787b1-baba-432f-bb1f-71b3fa2345ea.png)
 
