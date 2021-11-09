@@ -9,9 +9,9 @@
 - DB (mariadb)
 - DB schema: department, payment_info, user_info, user_score
 
-<index.html>
-![image](https://user-images.githubusercontent.com/50603209/137441756-753b118c-d583-468b-88bd-a3d471802648.png)
-<직원 예측>
+<Main>
+![image](https://user-images.githubusercontent.com/50603209/141024378-0b4ecb7a-3f69-42d7-8146-e45b4ee65be9.png)
+<Employ salary prediction>
 ![image](https://user-images.githubusercontent.com/50603209/141024092-8855110a-9be5-422b-829d-b4146e1073ac.png)
 ### 2. Job recommendation program (User based collaborative filtering)
 (check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/recommendation.py)
@@ -23,7 +23,8 @@
 - mean salary, mean_star, com_review_seg, welfare_sal, work_life_balance, company_culture, promotion opportunity, company head, company growth posibility_seg, company_recommendation_seg, CEO_support_seg
 - When you click the company name it shows you the company information like CEO, total revenue, home-page, company address, capital...etc from database.
 - However if there is no company data you clicked it will crawl data from jobkorea.co.kr and save company data in the database and show it in website.
-
+<Recommendation result>
 ![image](https://user-images.githubusercontent.com/50603209/139201195-cbc7895f-063a-436f-9eee-b7cc172e30e1.png)
+<Click company name>
 ![image](https://user-images.githubusercontent.com/50603209/139201275-405787b1-baba-432f-bb1f-71b3fa2345ea.png)
 
