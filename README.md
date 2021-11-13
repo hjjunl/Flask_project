@@ -1,6 +1,8 @@
 # Flask_project
 
-### 1. Simple Employee management and analysis web (project was done to know of python based ML web platform)
+### 1. Simple Employee management and analysis web 
+
+(Project was done to know of python based ML web platform)
 - CRUD function
 - Excel uploads to application database (test.xlsx)
 - Shows employees' payment chart using chart.js
