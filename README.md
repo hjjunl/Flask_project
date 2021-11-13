@@ -1,11 +1,11 @@
 # Flask_project
 
-### 1. Simple Employee management and analysis web (emp_program)
+### 1. Simple Employee management and analysis web (project was done to know of python based ML web platform)
 - CRUD function
 - Excel uploads to application database (test.xlsx)
 - Shows employees' payment chart using chart.js
 - Predict new employees' salary (department, gender, position)
-- simple random forest regressor model
+- simple random forest regressor model 
 - DB (mariadb)
 - DB schema: department, payment_info, user_info, user_score
 
