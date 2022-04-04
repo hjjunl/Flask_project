@@ -1,6 +1,12 @@
 # Flask_project
-
-### 1. Simple Employee management and analysis web 
+ ## 1.<Whole file employee_management & recommendation>
+  - Whole database create and insert query
+  - app, func file needs
+  - emp_data_ML.xlsx is for prediction
+  - employee_upload.xlsx is for employee upload.
+  - job_planet_all.xlsx is the data from jobplanet
+  ### This file will be better to just run the program!
+### 2. Simple Employee management and analysis web 
 
 (Project was done to know of python based ML web platform)
 - CRUD function
@@ -18,7 +24,7 @@
 <Employ salary prediction>
   
 ![image](https://user-images.githubusercontent.com/50603209/141024092-8855110a-9be5-422b-829d-b4146e1073ac.png)
-### 2. Job recommendation program (User based collaborative filtering)
+### 3. Job recommendation program (User based collaborative filtering)
 (check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/recommendation.py)
 
 (How did I get the data? check https://github.com/hjjunl/DataProjects/blob/main/Data_Python/job_planet_info.py)
@@ -36,11 +42,5 @@
   
   ![image](https://user-images.githubusercontent.com/50603209/139201275-405787b1-baba-432f-bb1f-71b3fa2345ea.png)
  
- ## Whole file employee_management & recommendation
-  - Whole database create and insert query
-  - app, func file needs
-  - emp_data_ML.xlsx is for prediction
-  - employee_upload.xlsx is for employee upload.
-  - job_planet_all.xlsx is the data from jobplanet
-  ### This file will be better to just run the program!
+
 
