@@ -6,6 +6,9 @@
   - employee_upload.xlsx is for employee upload.
   - job_planet_all.xlsx is the data from jobplanet
   ### This file will be better to just run the program!
+#### <ERD> 2. and 3. all connected!
+![image](https://user-images.githubusercontent.com/50603209/161480080-e96f2074-509c-4b8d-bb6a-86856b7040c9.png)
+
 ### 2. Simple Employee management and analysis web 
 
 (Project was done to know of python based ML web platform)
