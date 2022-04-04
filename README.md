@@ -35,4 +35,12 @@
 <Click company name>
   
   ![image](https://user-images.githubusercontent.com/50603209/139201275-405787b1-baba-432f-bb1f-71b3fa2345ea.png)
+ 
+ ## Whole file employee_management & recommendation
+  - Whole database create and insert query
+  - app, func file needs
+  - emp_data_ML.xlsx is for prediction
+  - employee_upload.xlsx is for employee upload.
+  - job_planet_all.xlsx is the data from jobplanet
+  ### This file will be better to just run the program!
 
